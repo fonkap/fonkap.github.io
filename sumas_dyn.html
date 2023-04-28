@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ejercicios de sumas y restas para niños</title>
+	<style>
+		body {
+			font-family: 'Courier New', monospace;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+		.texto-derecha {
+			text-align: right;
+			font-size: 2em;
+		}
+		.op1 {
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+			margin-left: 2em;
+			margin-bottom: 4em;
+		}
+		
+		.op {
+			float: left;
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+			margin-left: 2em;
+			margin-bottom: 3em;
+			/*width: 10em;*/
+			/*height: 3em;*/
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: center;
+			/*padding: em 1em;*/
+		}
+		.operaciones-container {
+    white-space: nowrap;
+}
+	</style>
+</head>
+<body>
+<div class="operaciones-container"></div>
+<script>
+	function getRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+function createRandomOp() {
+    var num1 = getRandomInt(10, 999);
+    var num2 = getRandomInt(10, 999);
+    var operator = getRandomInt(1, 2);
+    if (operator == 1) {
+        var result = num1 + num2;
+        return "<div class='texto-derecha'>" + num1 + "</div>" +
+               "<div class='texto-derecha'>+ " + (num2 < 100 ? "&nbsp;" : "") + num2 + "</div>";
+    } else {
+        var result = num1 - num2;
+        if (result < 0) {
+            var temp = num1;
+            num1 = num2;
+            num2 = temp;
+            result = num1 - num2;
+        }
+        return "<div class='texto-derecha'>" + num1 + "</div>" +
+               "<div class='texto-derecha'>- " + (num2 < 100 ? "&nbsp;" : "") + num2 + "</div>";
+    }
+}
+
+
+	var operacionesContainer = document.querySelector('.operaciones-container');
+	for (var i = 0; i < 1000; i++) {
+		var div = document.createElement("div");
+		div.setAttribute("class", "op");
+		div.innerHTML = createRandomOp();
+		operacionesContainer.appendChild(div);
+	}
+</script>
+
+</body>
+</html>
